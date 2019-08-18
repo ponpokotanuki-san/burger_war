@@ -4,7 +4,6 @@ import rospy
 import random
 
 from geometry_msgs.msg import Twist
-
 #from std_msgs.msg import String
 #from sensor_msgs.msg import Image
 #from cv_bridge import CvBridge, CvBridgeError
@@ -12,52 +11,59 @@ from geometry_msgs.msg import Twist
 
 
 class RandomBot():
+
     def __init__(self, bot_name):
         # bot name 
         self.name = bot_name
         # velocity publisher
         self.vel_pub = rospy.Publisher('cmd_vel', Twist,queue_size=1)
 
-    def calcTwist(self):
-        value = random.randint(1,1000)
-        if value < 250:
-            x = 0.2
-            th = 0
-        elif value < 500:
-            x = -0.2
-            th = 0
-        elif value < 750:
-            x = 0
-            th = 1
-        elif value < 1000:
-            x = 0
-            th = -1
-        else:
-            x = 0
-            th = 0
-        twist = Twist()
-        twist.linear.x = x; twist.linear.y = 0; twist.linear.z = 0
-        twist.angular.x = 0; twist.angular.y = 0; twist.angular.z = th
-        return twist
+
+
+
+
 
     def strategy(self):
-        r = rospy.Rate(1) # change speed 1fps
 
-        target_speed = 0
-        target_turn = 0
-        control_speed = 0
-        control_turn = 0
 
-        while not rospy.is_shutdown():
-            twist = self.calcTwist()
-            print(twist)
+        PI = 3.14159265358979
+        FPS = 10
+
+        #speed: -0.5~0.5
+        #angle: -180~180
+        #time : second
+        def RunCalc(speed, angle, time):
+            
+            cnt = 0
+            r = rospy.Rate(FPS) # change speed
+            time = time * FPS   # dhange to second
+
+            twist = Twist()
+
+            twist.linear.x = speed
+            twist.angular.z = PI * angle / 180
+
             self.vel_pub.publish(twist)
 
-            r.sleep()
+            while cnt < time:
 
+                print(twist)
+
+                cnt = cnt + 1
+                r.sleep()
+
+
+
+        RunCalc(0, 0, 1)        #Sleep
+        
+        RunCalc(0.5, 90, 1)
+        RunCalc(0.5, 0, 1.2)    #1point
+
+
+        RunCalc(0, 0, 1)        #Sleep
+       
 
 if __name__ == '__main__':
-    rospy.init_node('random_run')
+    rospy.init_node('random_rulo')
     bot = RandomBot('Random')
     bot.strategy()
-
