@@ -3,6 +3,7 @@
 import rospy
 import random
 
+from abstractCcr import *
 from geometry_msgs.msg import Twist
 #from std_msgs.msg import String
 #from sensor_msgs.msg import Image
@@ -10,21 +11,9 @@ from geometry_msgs.msg import Twist
 #import cv2
 
 
-class RandomBot():
-
-    def __init__(self, bot_name):
-        # bot name 
-        self.name = bot_name
-        # velocity publisher
-        self.vel_pub = rospy.Publisher('cmd_vel', Twist,queue_size=1)
-
-
-
-
-
+class RandomBot(AbstractCcr):
 
     def strategy(self):
-
 
         PI = 3.14159265358979
         FPS = 10
@@ -51,19 +40,40 @@ class RandomBot():
 
                 cnt = cnt + 1
                 r.sleep()
-
-
-
-        RunCalc(0, 0, 1)        #Sleep
         
-        RunCalc(0.5, 90, 1)
-        RunCalc(0.5, 0, 1.2)    #1point
+        def GoNext():
+            RunCalc(0, 46, 1)
+            RunCalc(0, 0, 0.5)
+            RunCalc(0.25, 0, 2.9)
+            RunCalc(0, 0, 0.5)
+            RunCalc(0, -45, 1)
+            RunCalc(0, 0, 0.5)
+        
+            RunCalc(0, -90, 1)
+            RunCalc(0, 0, 0.5)
+        
+            RunCalc(0, -90, 1)
+            RunCalc(0, 0, 0.5)
+            RunCalc(0, 90, 1)
+            RunCalc(0, 0, 0.5)
+
+            RunCalc(0, 44, 1)
+            RunCalc(0, 0, 0.5)
+            RunCalc(0.25, 0.5, 2.9)
+            RunCalc(0, 0, 0.5)
+            RunCalc(0, -135, 1)
+            RunCalc(0, 0, 1)
 
 
-        RunCalc(0, 0, 1)        #Sleep
+        RunCalc(0, 0, 1)
+        RunCalc(0.25, -0.5, 3.1) #1Point
+        RunCalc(0, 0, 0.5)
+
+	while not rospy.is_shutdown():
+            GoNext()
        
 
 if __name__ == '__main__':
     rospy.init_node('random_rulo')
-    bot = RandomBot('Random')
+    bot = RandomBot()
     bot.strategy()

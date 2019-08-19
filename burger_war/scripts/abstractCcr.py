@@ -3,10 +3,10 @@
 import rospy
 from abc import ABCMeta, abstractmethod
 from geometry_msgs.msg import Twist
-from ccr_msgs.msg import Bumper
 from sensor_msgs.msg import Image
 from sensor_msgs.msg import LaserScan
 from std_msgs.msg import String
+from nav_msgs.msg import Odometry
 from cv_bridge import CvBridge, CvBridgeError
 import cv2
 
@@ -14,8 +14,8 @@ import cv2
 class AbstractCcr(object):
     __metaclass__ = ABCMeta
     def __init__(self, 
-                 use_lidar=False ,use_camera=False, use_bumper=False,
-                 use_opt=False, use_usonic=False,
+                 use_lidar=False ,use_camera=False,
+                 use_opt=False, use_usonic=False,use_odometry=False,
                  camera_preview=False):
 
         # velocity publisher
@@ -38,13 +38,9 @@ class AbstractCcr(object):
             self.usonic_left_sub = rospy.Subscriber('us_left', LaserScan, self.usonicLeftCallback)
             self.usonic_right_sub = rospy.Subscriber('us_right', LaserScan, self.usonicRightCallback)
 
-        # bumper subscribre
-        if use_bumper:
-            # bumper state
-            self.bumper = Bumper()
-            self.left_bumper = False
-            self.right_bumper = False
-            self.bumper_sub = rospy.Subscriber('bumper', Bumper, self.bumperCallback)
+        # odometry subscriber
+	if use_odometry:
+	    self.odom_sub = rospy.Subscriber('odom', Odometry, self.odomCallback)
 
         # camera subscribver
         # please uncoment out if you use camera
@@ -75,12 +71,11 @@ class AbstractCcr(object):
 
     def usonicRightCallback(self, data):
         self.usonic[1] = data
-
-    # bumper topic call back sample
-    # update bumper state
-    def bumperCallback(self, data):
-        self.left_bumper = data.left.state
-        self.right_bumper = data.right.state
+    
+    # odometry call back
+    def odomCallback(self, data):
+        self.pose_x = data.pose.pose.position.x
+        self.pose_y = data.pose.pose.position.y
 
     # camera image call back sample
     # comvert image topic to opencv object and show
