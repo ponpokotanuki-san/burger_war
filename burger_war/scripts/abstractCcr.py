@@ -21,6 +21,7 @@ class AbstractCcr(object):
         # velocity publisher
         self.vel_pub = rospy.Publisher('cmd_vel', Twist,queue_size=1)
 
+        self.isGetLider = False
         # lidar scan subscriber
         if use_lidar:
             self.scan = LaserScan()
@@ -39,9 +40,10 @@ class AbstractCcr(object):
             self.usonic_right_sub = rospy.Subscriber('us_right', LaserScan, self.usonicRightCallback)
 
         # odometry subscriber
-	if use_odometry:
-	    self.odom_sub = rospy.Subscriber('odom', Odometry, self.odomCallback)
+        if use_odometry:
+            self.odom_sub = rospy.Subscriber('odom', Odometry, self.odomCallback)
 
+        self.isGetImg = False
         # camera subscribver
         # please uncoment out if you use camera
         if use_camera:
@@ -49,12 +51,13 @@ class AbstractCcr(object):
             self.img = None
             self.camera_preview = camera_preview
             self.bridge = CvBridge()
-            self.image_sub = rospy.Subscriber('camera/image_raw', Image, self.imageCallback)
+            self.image_sub = rospy.Subscriber('image_raw', Image, self.imageCallback)
 
     # lidar scan topic call back sample
     # update lidar scan state
     def lidarCallback(self, data):
         self.scan = data
+        self.isGetLider = True
 
     # optical  scan topic call back sample
     # update lidar scan state
@@ -82,6 +85,7 @@ class AbstractCcr(object):
     def imageCallback(self, data):
         try:
             self.img = self.bridge.imgmsg_to_cv2(data, "bgr8")
+            self.isGetImg = True
         except CvBridgeError as e:
             print(e)
 
