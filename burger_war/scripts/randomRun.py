@@ -133,8 +133,8 @@ class RandomBot(AbstractCcr):
             RunCalc(0, -135, 1)
             RunCalc(0, 0, 1)
 
-    while not rospy.is_shutdown():
-            self.SearchCircle()
+        while not rospy.is_shutdown():
+            SearchCircle()
        
 
 if __name__ == '__main__':
