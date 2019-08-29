@@ -139,5 +139,5 @@ class RandomBot(AbstractCcr):
 
 if __name__ == '__main__':
     rospy.init_node('random_rulo')
-    bot = RandomBot(use_camera=True, camera_preview=True, use_lidar=True)
+    bot = RandomBot(use_camera=True, camera_preview=False, use_lidar=True)
     bot.strategy()
