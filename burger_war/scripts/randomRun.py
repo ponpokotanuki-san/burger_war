@@ -111,30 +111,30 @@ class RandomBot(AbstractCcr):
                 r.sleep()
         
         def GoNext():
-            RunCalc(0, 46, 1)
+            RunCalc(0, 47, 1)
             RunCalc(0, 0, 0.5)
-            RunCalc(0.25, 0, 4.9)
+            RunCalc(0.25, 0, 3.9)
             RunCalc(0, 0, 0.5)
-            RunCalc(0, -45, 1)
-            RunCalc(0, 0, 0.5)
-        
-            RunCalc(0, -90, 1)
+            RunCalc(0, -46, 1)
             RunCalc(0, 0, 0.5)
         
-            RunCalc(0, -90, 1)
+            RunCalc(0, -91, 1)
             RunCalc(0, 0, 0.5)
-            RunCalc(0, 90, 1)
+        
+            RunCalc(0, -91, 1)
+            RunCalc(0, 0, 0.5)
+            RunCalc(0, 92, 1)
             RunCalc(0, 0, 0.5)
 
-            RunCalc(0, 44, 1)
+            RunCalc(0, 45, 1)
             RunCalc(0, 0, 0.5)
-            RunCalc(0.25, 0.5, 4.9)
+            RunCalc(0.25, 0.5, 3.9)
             RunCalc(0, 0, 0.5)
             RunCalc(0, -135, 1)
             RunCalc(0, 0, 1)
 
         RunCalc(0, 0, 1)
-        RunCalc(0.25, -0.5, 5) #1Point
+        RunCalc(0.25, -0.5, 4) #1Point
         RunCalc(0, 0, 0.5)
         while not rospy.is_shutdown():
             GoNext()
