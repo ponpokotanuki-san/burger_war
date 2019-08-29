@@ -73,7 +73,7 @@ class RandomBot(AbstractCcr):
                     #getframe[0]:中心座標、getframe[1]:半径
                     print("Blue : {}".format(getBlueMarker[1]))
                     isFindBlue = True
-                    blueangle = -((getBlueMarker[0][0] - 320)/100)
+                    blueangle = -((getBlueMarker[0][0] - 320)/10)
                     print(blueangle)
                 else:
                     isFindBlue = False
@@ -113,7 +113,7 @@ class RandomBot(AbstractCcr):
         def GoNext():
             RunCalc(0, 46, 1)
             RunCalc(0, 0, 0.5)
-            RunCalc(0.25, 0, 2.9)
+            RunCalc(0.25, 0, 4.9)
             RunCalc(0, 0, 0.5)
             RunCalc(0, -45, 1)
             RunCalc(0, 0, 0.5)
@@ -128,13 +128,16 @@ class RandomBot(AbstractCcr):
 
             RunCalc(0, 44, 1)
             RunCalc(0, 0, 0.5)
-            RunCalc(0.25, 0.5, 2.9)
+            RunCalc(0.25, 0.5, 4.9)
             RunCalc(0, 0, 0.5)
             RunCalc(0, -135, 1)
             RunCalc(0, 0, 1)
 
+        RunCalc(0, 0, 1)
+        RunCalc(0.25, -0.5, 5) #1Point
+        RunCalc(0, 0, 0.5)
         while not rospy.is_shutdown():
-            SearchCircle()
+            GoNext()
        
 
 if __name__ == '__main__':
