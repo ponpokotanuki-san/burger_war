@@ -64,7 +64,7 @@ class RandomBot(AbstractCcr):
 
         def SearchCircle():
             if self.isGetLider:
-                print(self.scan[0])
+                #print(self.scan[0])
 
             if self.isGetImg:
                 # 青円を検出
