@@ -63,7 +63,7 @@ class RandomBot(AbstractCcr):
         blueangle = 0
 
         def SearchCircle():
-            if self.isGetLider:
+            #if self.isGetLider:
                 #print(self.scan[0])
 
             if self.isGetImg:
