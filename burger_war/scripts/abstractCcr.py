@@ -21,7 +21,7 @@ class AbstractCcr(object):
         # velocity publisher
         self.vel_pub = rospy.Publisher('cmd_vel', Twist,queue_size=1)
 
-        self.isGetLider = False
+        self.isGetLidar = False
         # lidar scan subscriber
         if use_lidar:
             self.scan = LaserScan()
@@ -57,7 +57,7 @@ class AbstractCcr(object):
     # update lidar scan state
     def lidarCallback(self, data):
         self.scan = data
-        self.isGetLider = True
+        self.isGetLidar = True
 
     # optical  scan topic call back sample
     # update lidar scan state
