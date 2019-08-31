@@ -270,6 +270,7 @@ class RandomBot(AbstractCcr):
                 else:
                     nomarker = nomarker + 1
                 if self.isFindGreen:
+                    print("Green")
                     angle = self.greenangle
                     nomarker = 0
                     self.actMode = ActMode.CHASE
@@ -310,7 +311,7 @@ class RandomBot(AbstractCcr):
                         if(cnt > 40):
                             while not FindSpace():
                                 Move(0,-90)
-                            RunCalc(0.5, 0, 1.5)
+                            RunCalc(0.5, 0, 2.5)
                             break
                     GetDistance()
                     if self.isWallDetect:
