@@ -133,7 +133,7 @@ class RandomBot(AbstractCcr):
 
         def FindSpace():
             if self.isGetLidar:
-                if(self.scan.ranges[0] > 0.60 and self.scan.ranges[4] > 0.60 and self.scan.ranges[355] > 0.60):
+                if(self.scan.ranges[0] > 0.80 and self.scan.ranges[4] > 0.80 and self.scan.ranges[355] > 0.80):
                     return True
                 else:
                     GreenMarker = self.getCircle(np.array([60, 110, 60]), np.array([255, 200, 255])) 
@@ -235,7 +235,7 @@ class RandomBot(AbstractCcr):
         
 
         RunCalc(0, 0, 1)
-        RunCalc(0.25, -0.5, 2) #1Point
+        RunCalc(0.25, -0.5, 3.3) #1Point
         RunCalc(0, 0, 0.5)
         spin = 40
         backcnt = 0
