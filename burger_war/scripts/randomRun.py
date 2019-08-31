@@ -116,7 +116,7 @@ class RandomBot(AbstractCcr):
 
     def strategy(self):
         PI = 3.14159265358979
-        FPS = 5
+        FPS = 10
         r = rospy.Rate(FPS)
         actMode = ActMode.INIT
         t1 = time.time()
@@ -129,10 +129,12 @@ class RandomBot(AbstractCcr):
                 elif(self.scan.ranges[0] > 0.35 and self.scan.ranges[4] > 0.35 and self.scan.ranges[355] > 0.35):
                     self.isWallDetect = False
                     if prevalue is not self.isWallDetect:
+                        print("Next")
                         self.goNext = True
 
         def FindSpace():
             if self.isGetLidar:
+                print(self.scan.ranges[0])
                 if(self.scan.ranges[0] > 0.80 and self.scan.ranges[4] > 0.80 and self.scan.ranges[355] > 0.80):
                     return True
                 else:
