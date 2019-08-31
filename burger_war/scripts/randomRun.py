@@ -138,7 +138,7 @@ class RandomBot(AbstractCcr):
                 if(self.scan.ranges[0] > 0.60 and self.scan.ranges[4] > 0.60 and self.scan.ranges[355] > 0.60):
                     return True
                 else:
-                    GreenMarker = self.getCircle(np.array([60, 110, 60]), np.array([255, 200, 255])) 
+                    GreenMarker = self.getCircle(np.array([40, 75, 75]), np.array([80, 255, 255]))
                     if GreenMarker is not None:
                         self.isFindGreen = True
                         self.greenangle = -((GreenMarker[0][0] - 320)/10)
