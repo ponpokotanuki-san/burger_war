@@ -272,7 +272,7 @@ class RandomBot(AbstractCcr):
                     self.actMode = ActMode.CHASE
                     print(self.actMode)
 
-                Move(0.1,angle)
+                Move(0.2,angle)
             
             if self.goNext:
                 #RunCalc(0, 0, 0.5)
