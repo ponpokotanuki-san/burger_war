@@ -141,7 +141,7 @@ class RandomBot(AbstractCcr):
                     GreenMarker = self.getCircle(np.array([40, 75, 75]), np.array([80, 255, 255]))
                     if GreenMarker is not None:
                         self.isFindGreen = True
-                        self.greenangle = -((GreenMarker[0][0] - 320)/10)
+                        self.greenangle = -((GreenMarker[0][0] - 320)/9)
                         self.actMode = ActMode.CHASE
                         print(self.actMode)
                         return True
@@ -158,7 +158,7 @@ class RandomBot(AbstractCcr):
                     #getframe[0]:中心座標、getframe[1]:半径
                     print("Blue : {}".format(BlueMarker[1]))
                     self.isFindBlue = True
-                    self.blueangle = -((BlueMarker[0][0] - 320)/10)
+                    self.blueangle = -((BlueMarker[0][0] - 320)/9)
                     print(self.blueangle)
                 else:
                     self.isFindBlue = False
@@ -170,7 +170,7 @@ class RandomBot(AbstractCcr):
                     #getframe[0]:中心座標、getframe[1]:半径
                     print("Green : {}".format(GreenMarker[1]))
                     self.isFindGreen = True
-                    self.greenangle = -((GreenMarker[0][0] - 320)/10)
+                    self.greenangle = -((GreenMarker[0][0] - 320)/9)
                 else:
                     self.isFindGreen = False
             r.sleep()
@@ -183,7 +183,7 @@ class RandomBot(AbstractCcr):
                     #getframe[0]:中心座標、getframe[1]:半径
                     print("Green : {}".format(GreenMarker[1]))
                     self.isFindGreen = True
-                    self.greenangle = -((GreenMarker[0][0] - 320)/10)
+                    self.greenangle = -((GreenMarker[0][0] - 320)/9)
                 else:
                     self.isFindGreen = False
                     self.greenangle = 0
@@ -245,7 +245,7 @@ class RandomBot(AbstractCcr):
 
         while not rospy.is_shutdown():
             elapsedTime = time.time() - t1
-            if elapsedTime > 40.0:
+            if elapsedTime > 120.0:
                 self.actMode = ActMode.BERSERK
                 print(self.actMode)
 
@@ -259,27 +259,23 @@ class RandomBot(AbstractCcr):
                 Move(-0.15,0)
                 backcnt = backcnt + 1
                 print(backcnt)
-                if(backcnt > 100):
+                if(backcnt > 60):
                     self.actMode = ActMode.BERSERK
                     print(self.actMode)   
             else:
                 backcnt = 0
                 if self.isFindBlue:
                     angle = self.blueangle
-                    nomarker = 0
-                else:
-                    nomarker = nomarker + 1
+
                 if self.isFindGreen:
-                    print("Green")
                     angle = self.greenangle
-                    nomarker = 0
                     self.actMode = ActMode.CHASE
                     print(self.actMode)
 
                 Move(0.25,angle)
             
             if self.goNext:
-                RunCalc(0, 0, 0.5)
+                #RunCalc(0, 0, 0.5)
                 start = time.time()
                 while not FindSpace():
                     Move(0,spin)
