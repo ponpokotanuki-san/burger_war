@@ -135,7 +135,7 @@ class RandomBot(AbstractCcr):
         def FindSpace():
             if self.isGetLidar:
                 print(self.scan.ranges[0])
-                if(self.scan.ranges[0] > 0.80 and self.scan.ranges[4] > 0.80 and self.scan.ranges[355] > 0.80):
+                if(self.scan.ranges[0] > 0.60 and self.scan.ranges[4] > 0.60 and self.scan.ranges[355] > 0.60):
                     return True
                 else:
                     GreenMarker = self.getCircle(np.array([60, 110, 60]), np.array([255, 200, 255])) 
@@ -244,7 +244,7 @@ class RandomBot(AbstractCcr):
 
         while not rospy.is_shutdown():
             elapsedTime = time.time() - t1
-            if elapsedTime > 120.0:
+            if elapsedTime > 40.0:
                 self.actMode = ActMode.BERSERK
                 print(self.actMode)
 
@@ -280,7 +280,8 @@ class RandomBot(AbstractCcr):
                 RunCalc(0, 0, 0.5)
                 start = time.time()
                 while not FindSpace():
-                    Move(0,spin)
+                    #Move(0,spin)
+                    RunCalc(0,spin,0.2)
                     timeout = time.time() - start
                     if(timeout > 10):
                         self.actMode = ActMode.BERSERK
