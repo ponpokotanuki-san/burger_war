@@ -116,7 +116,7 @@ class RandomBot(AbstractCcr):
 
     def strategy(self):
         PI = 3.14159265358979
-        FPS = 10
+        FPS = 5
         r = rospy.Rate(FPS)
         actMode = ActMode.INIT
         t1 = time.time()
