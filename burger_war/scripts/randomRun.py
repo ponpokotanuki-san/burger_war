@@ -141,7 +141,7 @@ class RandomBot(AbstractCcr):
                     GreenMarker = self.getCircle(np.array([40, 75, 75]), np.array([80, 255, 255]))
                     if GreenMarker is not None:
                         self.isFindGreen = True
-                        self.greenangle = -((GreenMarker[0][0] - 320)/9)
+                        self.greenangle = -((GreenMarker[0][0] - 320)/5)
                         self.actMode = ActMode.CHASE
                         print(self.actMode)
                         return True
@@ -158,7 +158,7 @@ class RandomBot(AbstractCcr):
                     #getframe[0]:中心座標、getframe[1]:半径
                     print("Blue : {}".format(BlueMarker[1]))
                     self.isFindBlue = True
-                    self.blueangle = -((BlueMarker[0][0] - 320)/9)
+                    self.blueangle = -((BlueMarker[0][0] - 320)/5)
                     print(self.blueangle)
                 else:
                     self.isFindBlue = False
@@ -170,7 +170,7 @@ class RandomBot(AbstractCcr):
                     #getframe[0]:中心座標、getframe[1]:半径
                     print("Green : {}".format(GreenMarker[1]))
                     self.isFindGreen = True
-                    self.greenangle = -((GreenMarker[0][0] - 320)/9)
+                    self.greenangle = -((GreenMarker[0][0] - 320)/5)
                 else:
                     self.isFindGreen = False
             r.sleep()
@@ -183,7 +183,7 @@ class RandomBot(AbstractCcr):
                     #getframe[0]:中心座標、getframe[1]:半径
                     print("Green : {}".format(GreenMarker[1]))
                     self.isFindGreen = True
-                    self.greenangle = -((GreenMarker[0][0] - 320)/9)
+                    self.greenangle = -((GreenMarker[0][0] - 320)/5)
                 else:
                     self.isFindGreen = False
                     self.greenangle = 0
@@ -259,7 +259,7 @@ class RandomBot(AbstractCcr):
                 Move(-0.15,0)
                 backcnt = backcnt + 1
                 print(backcnt)
-                if(backcnt > 60):
+                if(backcnt > 40):
                     self.actMode = ActMode.BERSERK
                     print(self.actMode)   
             else:
