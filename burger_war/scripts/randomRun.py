@@ -143,6 +143,7 @@ class RandomBot(AbstractCcr):
                         self.isFindGreen = True
                         self.greenangle = -((GreenMarker[0][0] - 320)/10)
                         self.actMode = ActMode.CHASE
+                        print(self.actMode)
                         return True
                     else:
                         return False
@@ -280,8 +281,9 @@ class RandomBot(AbstractCcr):
                 RunCalc(0, 0, 0.5)
                 start = time.time()
                 while not FindSpace():
-                    #Move(0,spin)
-                    RunCalc(0,spin,0.2)
+                    Move(0,spin)
+                    #RunCalc(0,spin,0.2)
+                    print("Spin : {}".format(spin))
                     timeout = time.time() - start
                     if(timeout > 10):
                         self.actMode = ActMode.BERSERK
